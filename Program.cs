@@ -10,8 +10,6 @@ namespace _365_Migration_Prep_Tool
     {
         static void Main(string[] args)
         {
-
-
             // Write a brief introduction
             Console.WriteLine("This tool is designed to aid in the deployment of Office 365 for various clients." +
             "\nIt allows you to create a migration .CSV file, as well as provide the \ncorrect details for setting up the users account.\n");
@@ -76,7 +74,7 @@ namespace _365_Migration_Prep_Tool
             "\nIt allows you to create a migration .CSV file, as well as provide the \ncorrect details for setting up the users account.\n");
 
             // Initial choice variables.
-            string[] options = new string[4] { "1. Create .CSV file", "2. Confirm User's login Credentials", "3. Confirm Mobile Device Configuration", "4. Powershell Tools" };
+            string[] options = new string[5] { "1. Create .CSV file", "2. Confirm User's login Credentials", "3. Confirm Mobile Device Configuration", "4. Powershell Tools", "5. Quit" };
             string userChoice;
 
             Console.WriteLine("Please choose from the following " + options.Length + " options:");
@@ -108,6 +106,10 @@ namespace _365_Migration_Prep_Tool
                     PowershellCon();
                     break;
 
+                case "5":
+                    Environment.Exit(0);
+                    break;
+
                 default:
                     Console.WriteLine("\nSorry that option was not recognised. Please choose from the listed options");
                     goto ListOptions;
@@ -129,21 +131,106 @@ namespace _365_Migration_Prep_Tool
             Console.WriteLine("File has been created and placed on your desktop. Filename: " + Globals.EmailAddress + ".csv");
             Console.WriteLine("Press any key to return to the main menu");
             Console.ReadLine();
+            MainMenu();
         }
 
         static void ConfirmCredentials()
         {
             Console.Clear();
+
+            // Print out the information stored in globals to identify the account
+            Console.Write(
+                "Autodiscover server: autodiscover." + Globals.ClientDomain +
+                "\nUsername: " + Globals.AccountName + "@" + Globals.ClientDomain +
+                "\nEmail Address: " + Globals.EmailAddress +
+                "\n\nEnsure that the Username and email address are entered" +
+                "\ncorrectly as they are not always identical."
+                );
+            Console.Write(
+                "\nIf you need to check the login details, you can do so" +
+                "\nby visiting \nhttp://login.microsoftonline.com and logging in."
+                );
+            Console.Write("Press any key to return to the main menu.");
+            Console.ReadLine();
+            MainMenu();
         }
 
         static void MobileDevHelp()
         {
-            // Function to display mobile device config.
+            Console.Clear();
+            // Display information regarding all mobile devices.
+            Console.WriteLine("Please choose your mobile device type: " +
+                "\n1. iPhone\n2. Android\n3. Windows Phone\n4. BlackBerry");
+            Choice: string choice = Console.ReadLine();
+
+            // Switch for various devices. 
+            switch (choice)
+            {
+                // iPhone guide
+                case "1":
+                    Console.Write(
+                        "On iOS, navigate to Settings > Mail, Contacts and Calendars" +
+                        "\n> Add Account > Exchange. Enter the details below:" +
+                        "\n\nEmail: " + Globals.AccountName + "@" + Globals.ClientDomain +
+                        "\nPassword: the users AD password (if synched) or their 365 password." +
+                        "\nDescription: " + Globals.ClientDomain + " 365" +
+                        "\n\nTap next and the device will autoconfigure, you user can then" +
+                        "\nselect what they wish to sync when prompted."
+                        );
+                    break;
+                
+                //Android guide
+                case "2":
+                    Console.WriteLine(
+                        "The exact location of mail settings can vary slightly per device" +
+                        "\nbut it is usually under Menu > Settings > Mail or Accounts." +
+                        "\nOnce there, enter the details as below:" +
+                        "\nEmail Address: " + Globals.AccountName + "@" + Globals.ClientDomain +
+                        "\nPassword: the users AD password (if synched) or their 365 password." +
+                        "\n\nTap Next, the system should auto-populate most of the details" +
+                        "\nIf you are prompted t oaccept the security certificate for" +
+                        "\nOffice365, tap OK. The device should complete setup automatically."
+                        );
+                    break;
+
+                // Windows phone
+                case "3":
+                    Console.WriteLine("To be done when I can get hold of a windows phone");
+                    break;
+
+                // Blackberry
+                case "4":
+                    Console.Write(
+                        "BlackBerry's should be to configured to use BlackBerry Cloud Service" +
+                        "\nwhere possible, as it provides additional functionality for the" +
+                        "\nBlackBerry device.\n\nBefore configuring a BlackBerry, it is recommended to install" +
+                        "\nthe BlackBerry Desktop software and back up the device, as it will" +
+                        "\nneed to be reset to factory settings before it can be set up with" +
+                        "\nBlackBerry Cloud Service." +
+                        "\n\n A more in-depth user guide on how to do this can be found in" +
+                        "\nthe Knowledgebase folder in the Documents drive."
+                        );
+                    break;
+
+                default:
+                    Console.WriteLine("Sorry I do not understand the choice. Please enter a number" +
+                        "\ncorresponding with your mobile device type.");
+                    goto Choice;
+            }
+
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+            MainMenu();
+            
         }
 
         static void PowershellCon()
         {
             // Establish a powershell connection.
+            Console.Write("Powershell functionality is not available yet." +
+                "\nPlease press any key to retun to the main menu");
+            Console.ReadLine();
+            MainMenu();
         }
     }
 }
