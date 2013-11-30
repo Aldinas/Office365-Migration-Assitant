@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "365 Migration Prep Tool", "365 Migration Prep Tool.csproj", "{CAB5C56D-3F5B-4701-8992-9AD69E2D16EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAB5C56D-3F5B-4701-8992-9AD69E2D16EC}.Debug|x86.ActiveCfg = Debug|x86
+		{CAB5C56D-3F5B-4701-8992-9AD69E2D16EC}.Debug|x86.Build.0 = Debug|x86
+		{CAB5C56D-3F5B-4701-8992-9AD69E2D16EC}.Release|x86.ActiveCfg = Release|x86
+		{CAB5C56D-3F5B-4701-8992-9AD69E2D16EC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
