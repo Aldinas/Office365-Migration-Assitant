@@ -15,8 +15,7 @@ namespace _365_Migration_Prep_Tool
         private static string _emailAddress;
 
         // Required in case of a powershell connection, the admin account details.
-        private static string _adminAccount365;
-        private static string _adminPassword365;
+        private static string _adminCredentials365;
 
         public static string ClientDomain
         {
@@ -36,16 +35,14 @@ namespace _365_Migration_Prep_Tool
             set { _emailAddress = value; }
         }
 
-        public static string AdminAccount365
+        // Powershell may need some work. Looks like the
+        // System.Management.Automation namespace isn't
+        // available in VS 2010 Express. Need to 
+        // investigate further. 
+        public static string AdminCredentials365
         {
-            get { return _adminAccount365; }
-            set { _adminAccount365 = value; }
-        }
-
-        public static string AdminPassword365
-        {
-            get { return _adminPassword365; }
-            set { _adminPassword365 = value; }
+            get { return _adminCredentials365; }
+            set { _adminCredentials365 = value; }
         }
     }
 }

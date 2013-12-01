@@ -74,7 +74,7 @@ namespace _365_Migration_Prep_Tool
             "\nIt allows you to create a migration .CSV file, as well as provide the \ncorrect details for setting up the users account.\n");
 
             // Initial choice variables.
-            string[] options = new string[5] { "1. Create .CSV file", "2. Confirm User's login Credentials", "3. Confirm Mobile Device Configuration", "4. Powershell Tools", "5. Quit" };
+            string[] options = new string[6] { "1. Create .CSV file", "2. Confirm User's login Credentials", "3. Confirm Mobile Device Configuration", "4. Powershell Tools", "5. Change user details" ,"6. Quit" };
             string userChoice;
 
             Console.WriteLine("Please choose from the following " + options.Length + " options:");
@@ -107,6 +107,11 @@ namespace _365_Migration_Prep_Tool
                     break;
 
                 case "5":
+                    ChangeUserDetails();
+                    break;
+
+
+                case "6":
                     Environment.Exit(0);
                     break;
 
@@ -203,8 +208,8 @@ namespace _365_Migration_Prep_Tool
                     Console.Write(
                         "BlackBerry's should be to configured to use BlackBerry Cloud Service" +
                         "\nwhere possible, as it provides additional functionality for the" +
-                        "\nBlackBerry device.\n\nBefore configuring a BlackBerry, it is recommended to install" +
-                        "\nthe BlackBerry Desktop software and back up the device, as it will" +
+                        "\nBlackBerry device.\n\nBefore configuring a BlackBerry, it is recommended" + 
+                        "\nto back up the device, as it will" +
                         "\nneed to be reset to factory settings before it can be set up with" +
                         "\nBlackBerry Cloud Service." +
                         "\n\n A more in-depth user guide on how to do this can be found in" +
@@ -231,6 +236,52 @@ namespace _365_Migration_Prep_Tool
                 "\nPlease press any key to retun to the main menu");
             Console.ReadLine();
             MainMenu();
+        }
+
+        static void ChangeUserDetails()
+        {
+            Console.Write(
+                "What would you like to change?\n1. Mail Domain\n2. User Account and Email Address\n"
+                );
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    // Change mail domain
+                    Console.WriteLine("Current mail domain is: " + Globals.ClientDomain);
+                    Console.WriteLine("Please enter the new domain and press Enter:");
+                    Globals.ClientDomain = Console.ReadLine();
+                    Console.WriteLine("The new mail domain is now set to " + Globals.ClientDomain);
+                    Console.WriteLine("Press any key to return to the main menu.");
+                    Console.ReadLine();
+                    MainMenu();
+                    break;
+
+                case "2":
+                    // Change email and user account
+                    Console.Write("Current User Account is: " + Globals.AccountName +
+                        "\nand the current email address is: " + Globals.EmailAddress +
+                        "\nPlease enter the new User Account name and press enter: ");
+                    Globals.AccountName = Console.ReadLine();
+                    Console.WriteLine("Please enter the users email address and press enter: ");
+                    Globals.EmailAddress = Console.ReadLine();
+                    Console.Write("The new details are as follows: " +
+                        "\nUser Name: " + Globals.AccountName +
+                        "\nEmail Address: " + Globals.EmailAddress +
+                        "\n Press any key to return to the main menu."
+                        );
+                    Console.ReadLine();
+                    MainMenu();
+                    break;
+
+                default:
+                    Console.Clear();
+                    Console.WriteLine("I do not recognise that option. Please enter one of the following:");
+                    ChangeUserDetails();
+                    break;
+                     
+            }
         }
     }
 }
